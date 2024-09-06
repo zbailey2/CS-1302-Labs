@@ -7,7 +7,7 @@ package edu.westga.cs1302.cms.model;
  */
 public class Student {
 	private String name;
-	private Integer grade;
+	private double grade;
 	
 	/** Create a new student with the specified name
 	 * 
@@ -18,12 +18,15 @@ public class Student {
 	 * @param grade the grade of the new student
 	 * @throws IllegalArgumentException when precondition is violated
 	 */
-	public Student(String name, Integer grade) throws IllegalArgumentException {
+	public Student(String name, double grade) throws IllegalArgumentException {
 		if (name == null) {
 			throw new IllegalArgumentException("Name must be provided.");
 		}
 		if (name.length() < 3) {
 			throw new IllegalArgumentException("Name must have at least 3 characters.");
+		}
+		if (grade < 0 || grade > 100) {
+			throw new IllegalArgumentException("Grade must be from 0-100");
 		}
 		this.name = name;
 		this.grade = grade;
@@ -47,7 +50,7 @@ public class Student {
 	 * 
 	 * @return the grade of the student
 	 */
-	public Integer getGrade() {
+	public double getGrade() {
 		return this.grade;
 	}
 	

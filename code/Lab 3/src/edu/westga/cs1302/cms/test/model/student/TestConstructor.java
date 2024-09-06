@@ -24,5 +24,14 @@ class TestConstructor {
 		
 		assertEquals("123", result.getName(), "checking the name of the student");
 	}
-
+	
+	@Test
+	void testGradeTooLow() {
+		assertThrows(IllegalArgumentException.class, ()-> {new Student("John", -1);});
+	}
+	
+	@Test
+	void testGradeTooHigh() {
+		assertThrows(IllegalArgumentException.class,()-> {new Student("John", 101);});
+	}
 }

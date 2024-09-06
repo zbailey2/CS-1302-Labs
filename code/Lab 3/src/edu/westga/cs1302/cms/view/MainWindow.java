@@ -4,6 +4,7 @@ import edu.westga.cs1302.cms.model.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
@@ -20,24 +21,26 @@ public class MainWindow {
 	private ListView<Student> students;
 	@FXML
     private TextField grade;
+	@FXML
+    private Label studentGrade;
 
 	@FXML
 	void addStudent(ActionEvent event) {
 		String studentName = this.name.getText();
 
 		try {
-			Integer studentGrade = Integer.parseInt(this.grade.getText());
+			double studentGrade = Double.parseDouble(this.grade.getText());
 			Student student = new Student(studentName, studentGrade);
 			this.students.getItems().add(student);
 		} catch (NumberFormatException errorGrade) {
 			Alert errorPopup = new Alert(Alert.AlertType.ERROR);
 			errorPopup.setContentText(
-					"Unable to create student: " + errorGrade.getMessage() + "Please reenter name and try again.");
+					"Unable to create student: " + errorGrade.getMessage() + " Please reenter grade and try again.");
 			errorPopup.showAndWait();
 		} catch (IllegalArgumentException errorName) {
 			Alert errorPopup = new Alert(Alert.AlertType.ERROR);
 			errorPopup.setContentText(
-					"Unable to create student: " + errorName.getMessage() + "Please reenter name and try again.");
+					"Unable to create student: " + errorName.getMessage() + " Please reenter name or grade and then try again.");
 			errorPopup.showAndWait();
 		}
 	}
@@ -50,6 +53,19 @@ public class MainWindow {
 		} else {
 			Alert errorPopup = new Alert(Alert.AlertType.ERROR);
 			errorPopup.setContentText("No student selected. Unable to remove.");
+			errorPopup.showAndWait();
+		}
+	}
+	
+	@FXML
+	void viewGrade(ActionEvent event) {
+		Student student = this.students.getSelectionModel().getSelectedItem();
+		if (student != null) {
+			double currentGrade = student.getGrade();
+			this.studentGrade.setText(Double.toString(currentGrade));
+		} else {
+			Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+			errorPopup.setContentText("No student selected. Unable to check grade.");
 			errorPopup.showAndWait();
 		}
 	}
