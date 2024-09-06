@@ -29,7 +29,7 @@ public class Student {
 			throw new IllegalArgumentException("Grade must be from 0-100");
 		}
 		this.name = name;
-		this.grade = grade;
+		this.grade = Math.round(grade * 100.00) / 100.00;
 	}
 	
 	/** Return the name of the student
