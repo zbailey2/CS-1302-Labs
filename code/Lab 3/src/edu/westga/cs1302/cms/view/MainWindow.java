@@ -23,6 +23,8 @@ public class MainWindow {
     private TextField grade;
 	@FXML
     private Label studentGrade;
+	@FXML
+    private Label classAverage;
 
 	@FXML
 	void addStudent(ActionEvent event) {
@@ -58,15 +60,37 @@ public class MainWindow {
 	}
 	
 	@FXML
-	void viewGrade(ActionEvent event) {
+	void viewGrade() {
 		Student student = this.students.getSelectionModel().getSelectedItem();
 		if (student != null) {
 			double currentGrade = student.getGrade();
-			this.studentGrade.setText(Double.toString(currentGrade));
+			this.studentGrade.setText("Grade: " + Double.toString(currentGrade));
 		} else {
 			Alert errorPopup = new Alert(Alert.AlertType.ERROR);
 			errorPopup.setContentText("No student selected. Unable to check grade.");
 			errorPopup.showAndWait();
+		}
+	}
+	
+	@FXML
+	void clearGrade() {
+		this.studentGrade.setText("");
+	}
+	
+	@FXML
+	void getAverageOfClass() {
+		double average = 0.0;
+		if (this.students.getItems().size() == 0) {
+			this.classAverage.setText("");
+		} else { 
+			for (int student = 0; student < this.students.getItems().size(); student++) {
+				Student currentStudent = this.students.getItems().get(student);
+				double currentGrade = currentStudent.getGrade();
+				average += currentGrade;
+		}
+		average /= this.students.getItems().size();
+		average = Math.round(average * 100.00) / 100.00;
+		this.classAverage.setText("Class Average " + System.lineSeparator() + Double.toString(average));
 		}
 	}
 
