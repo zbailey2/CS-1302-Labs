@@ -1,6 +1,5 @@
 package edu.westga.cs1302.cms.test.model.student;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
