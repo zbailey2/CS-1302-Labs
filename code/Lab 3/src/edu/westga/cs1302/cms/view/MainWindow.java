@@ -1,5 +1,7 @@
 package edu.westga.cs1302.cms.view;
 
+import java.util.ArrayList;
+
 import edu.westga.cs1302.cms.model.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,11 +22,11 @@ public class MainWindow {
 	@FXML
 	private ListView<Student> students;
 	@FXML
-    private TextField grade;
+	private TextField grade;
 	@FXML
-    private Label studentGrade;
+	private Label studentGrade;
 	@FXML
-    private Label classAverage;
+	private Label classAverage;
 
 	@FXML
 	void addStudent(ActionEvent event) {
@@ -41,8 +43,8 @@ public class MainWindow {
 			errorPopup.showAndWait();
 		} catch (IllegalArgumentException errorName) {
 			Alert errorPopup = new Alert(Alert.AlertType.ERROR);
-			errorPopup.setContentText(
-					"Unable to create student: " + errorName.getMessage() + " Please reenter name or grade and then try again.");
+			errorPopup.setContentText("Unable to create student: " + errorName.getMessage()
+					+ " Please reenter name or grade and then try again.");
 			errorPopup.showAndWait();
 		}
 	}
@@ -58,7 +60,7 @@ public class MainWindow {
 			errorPopup.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	void viewGrade() {
 		Student student = this.students.getSelectionModel().getSelectedItem();
@@ -71,32 +73,36 @@ public class MainWindow {
 			errorPopup.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	void clearGrade() {
 		this.studentGrade.setText("");
 	}
-	
+
 	@FXML
 	void getAverageOfClass() {
-		double average = 0.0;
+		//Must initialize ArrayList in order to test getAverage in Student class
+		//Can not test a ListView in JUnit without an appropriate JavaFX environment
+		//I do not know how to do that yet
+		ArrayList<Student> allStudents = new ArrayList<Student>();
+		allStudents.addAll(this.students.getItems());
 		if (this.students.getItems().size() == 0) {
 			this.classAverage.setText("");
-		} else { 
-			for (int student = 0; student < this.students.getItems().size(); student++) {
-				Student currentStudent = this.students.getItems().get(student);
-				double currentGrade = currentStudent.getGrade();
-				average += currentGrade;
+		} else {
+			double average = Student.getAverage(allStudents);
+			this.classAverage.setText("Class Average " + System.lineSeparator() + Double.toString(average));
 		}
-		average /= this.students.getItems().size();
-		average = Math.round(average * 100.00) / 100.00;
-		this.classAverage.setText("Class Average " + System.lineSeparator() + Double.toString(average));
-		}
+
 	}
 
 	@FXML
 	void initialize() {
+		assert this.classAverage != null
+				: "fx:id=\"classAverage\" was not injected: check your FXML file 'MainWindow.fxml'.";
+		assert this.grade != null : "fx:id=\"grade\" was not injected: check your FXML file 'MainWindow.fxml'.";
 		assert this.name != null : "fx:id=\"name\" was not injected: check your FXML file 'MainWindow.fxml'.";
+		assert this.studentGrade != null
+				: "fx:id=\"studentGrade\" was not injected: check your FXML file 'MainWindow.fxml'.";
 		assert this.students != null : "fx:id=\"students\" was not injected: check your FXML file 'MainWindow.fxml'.";
 	}
 

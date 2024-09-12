@@ -1,20 +1,24 @@
 package edu.westga.cs1302.cms.model;
 
-/** Stores and manages information for a single student.
+import java.util.ArrayList;
+
+/**
+ * Stores and manages information for a single student.
  * 
- * @author CS 1302
+ * @author Zach Bailey
  * @version Fall 2024
  */
 public class Student {
 	private String name;
 	private double grade;
-	
-	/** Create a new student with the specified name
+
+	/**
+	 * Create a new student with the specified name
 	 * 
 	 * @precondition name != null && name.length() >= 3
 	 * @postcondition getName() == name
 	 * 
-	 * @param name the name of the new student
+	 * @param name  the name of the new student
 	 * @param grade the grade of the new student
 	 * @throws IllegalArgumentException when precondition is violated
 	 */
@@ -31,20 +35,21 @@ public class Student {
 		this.name = name;
 		this.grade = Math.round(grade * 100.00) / 100.00;
 	}
-	
-	/** Return the name of the student
+
+	/**
+	 * Return the name of the student
 	 * 
 	 * @return the name of the student
 	 */
 	public String getName() {
 		return this.name;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Returns the grade of the student
 	 * 
@@ -53,5 +58,24 @@ public class Student {
 	public double getGrade() {
 		return this.grade;
 	}
-	
+
+	/**
+	 * gets the average grade for students contained in the ListView
+	 * 
+	 * @param students students in list
+	 * @return average
+	 */
+	public static double getAverage(ArrayList<Student> students) {
+		if (students.isEmpty()) {
+			return 0.0;
+		}
+		double totalGrade = 0.0;
+		for (Student student : students) {
+			totalGrade += student.getGrade();
+		}
+
+		double average = totalGrade / students.size();
+		return Math.round(average * 100.00) / 100.00;
+	}
+
 }
