@@ -1,6 +1,7 @@
 package edu.westga.cs1302.bill.model;
 
-/** Stores information for a single item on a bill.
+/**
+ * Stores information for a single item on a bill.
  * 
  * @author CS 1302
  * @version Fall 2024
@@ -8,15 +9,14 @@ package edu.westga.cs1302.bill.model;
 public class BillItem {
 	private final String name;
 	private final double amount;
-	
-	/** create anew bill item with the provided name and amount
+
+	/**
+	 * create anew bill item with the provided name and amount
 	 * 
-	 * @precondition name != null &&
-	 * 				 amount > 0
-	 * @postcondition getName() == name &&
-	 * 				  getAmount() == amount
+	 * @precondition name != null && amount > 0
+	 * @postcondition getName() == name && getAmount() == amount
 	 * 
-	 * @param name the name of the bill item
+	 * @param name   the name of the bill item
 	 * @param amount the amount (cost) of the bill item
 	 */
 	public BillItem(String name, double amount) {
@@ -29,9 +29,9 @@ public class BillItem {
 		this.name = name;
 		this.amount = amount;
 	}
-	
 
-	/** Return the name for the bill item
+	/**
+	 * Return the name for the bill item
 	 * 
 	 * @precondition none
 	 * @postcondition none
@@ -41,9 +41,9 @@ public class BillItem {
 	public String getName() {
 		return this.name;
 	}
-	
 
-	/** Return the amount for the bill item
+	/**
+	 * Return the amount for the bill item
 	 * 
 	 * @precondition none
 	 * @postcondition none
