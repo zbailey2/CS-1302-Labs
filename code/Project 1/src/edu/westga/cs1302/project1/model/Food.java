@@ -6,6 +6,6 @@ package edu.westga.cs1302.project1.model;
  * @author CS 1302
  * @version Fall 2024
  */
-public class Pantry {
-
+public class Food {
+	
 }
