@@ -53,7 +53,20 @@ public class MainWindow {
      */
     @FXML
     public void setQuantity(ActionEvent event) {
-    	//Code goes here
+    	Food selectedFood = this.pantryList.getSelectionModel().getSelectedItem();
+    	try {
+    		int quantity = Integer.parseInt(this.quantity.getText());
+    		selectedFood.setQuantity(quantity);
+    		this.pantryList.refresh();
+    	} catch (IllegalArgumentException invalidQuantity) {
+    		Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+    		errorPopup.setContentText("Unable to set quantity please enter valid number and try again.");
+    		errorPopup.showAndWait();
+    	} catch (NullPointerException nullFood) {
+    		Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+    		errorPopup.setContentText("No food selected, try again");
+    		errorPopup.showAndWait();
+    	}
     }
     
     /**
@@ -62,7 +75,15 @@ public class MainWindow {
      */
     @FXML
     public void increaseQuantity(ActionEvent event) {
-    	//Code goes here
+    	Food selectedFood = this.pantryList.getSelectionModel().getSelectedItem();
+    	try {
+    		selectedFood.increaseFoodQuantity();
+    		this.pantryList.refresh();
+    	} catch (NullPointerException nullFood) {
+    		Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+    		errorPopup.setContentText("No food selected, try again");
+    		errorPopup.showAndWait();
+    	}
     }
     
     /**
@@ -71,7 +92,21 @@ public class MainWindow {
      */
     @FXML
     public void decreaseQuantity(ActionEvent event) {
-    	//Code goes here
+    	Food selectedFood = this.pantryList.getSelectionModel().getSelectedItem();
+    	try {
+    		selectedFood.decreaseFoodQuantity();
+    		this.pantryList.refresh();
+    	} catch (NullPointerException nullFood) {
+    		Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+    		errorPopup.setContentText("No food selected, try again");
+    		errorPopup.showAndWait();
+    	} catch (IllegalArgumentException belowZero) {
+    		Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+    		errorPopup.setContentText("Unable to decrease further: " + belowZero.getMessage()
+    		+ ".");
+    		errorPopup.showAndWait();
+    		errorPopup.showAndWait();
+    	}
     }
     
     /**
