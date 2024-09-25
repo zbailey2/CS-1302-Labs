@@ -63,4 +63,33 @@ public class Food {
 	public String toString() {
 		return this.name + " - " + this.quantity;
 	}
+	
+	/**
+	 * Increases the value of the quantity by one
+	 */
+	public void increaseFoodQuantity() {
+		this.quantity++;
+	}
+	
+	/**
+	 * decreases the quantity by one
+	 */
+	public void decreaseFoodQuantity() {
+		if (this.quantity > 0) {
+			this.quantity--;
+		} else {
+			throw new IllegalArgumentException("Quantity cannot be less than 0");
+		}
+	}
+	
+	/**
+	 * Sets quantity to whatever value is input into it
+	 * @param newQuantity the quantity passed in by the user
+	 */
+	public void setQuantity(int newQuantity) {
+		if (newQuantity < 0) {
+			throw new IllegalArgumentException("The quantity can not be set to a number beloew 0");
+		}
+		this.quantity = newQuantity;
+	}
 }

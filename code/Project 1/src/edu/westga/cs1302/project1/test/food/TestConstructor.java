@@ -10,7 +10,7 @@ import edu.westga.cs1302.project1.model.Food;
 public class TestConstructor {
 	
 	@Test
-	void testValidFoodItem() {
+	public void testValidFoodItem() {
 	Food foodOne = new Food("Apple", "Fruit");
 	assertEquals("Apple", foodOne.getName());
 	assertEquals("Fruit", foodOne.getType());
@@ -18,21 +18,21 @@ public class TestConstructor {
 	}
 	
 	@Test
-	void testNullName() {
+	public void testNullName() {
 		assertThrows(IllegalArgumentException.class, () ->{
 			new Food(null, "Fruit");
 		});
 	}
 	
 	@Test
-	void testNullType() {
+	public void testNullType() {
 		assertThrows(IllegalArgumentException.class, () ->{
 			new Food("Apple", null);
 		});
 	}
 	
 	@Test
-	void testBothNull() {
+	public void testBothNull() {
 		assertThrows(IllegalArgumentException.class, () ->{
 			new Food(null, null);
 		});

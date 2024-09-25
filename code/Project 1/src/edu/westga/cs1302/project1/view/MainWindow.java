@@ -23,6 +23,9 @@ public class MainWindow {
     
     @FXML
     private ListView<Food> pantryList;
+    
+    @FXML
+    private TextField quantity;
 	
     /**
      * Will add food to pantry later when implemented
@@ -79,6 +82,7 @@ public class MainWindow {
         assert this.foodName != null : "fx:id=\"foodName\" was not injected: check your FXML file 'MainWindow.fxml'.";
         assert this.foodType != null : "fx:id=\"foodType\" was not injected: check your FXML file 'MainWindow.fxml'.";
         assert this.pantryList != null : "fx:id=\"pantryList\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert this.quantity != null : "fx:id=\"quantity\" was not injected: check your FXML file 'MainWindow.fxml'.";
         this.foodType.getItems().addAll("Vegetable", "Meat", "Bread", "Fruit", "Dessert", "Ingredient");
     }
 }
