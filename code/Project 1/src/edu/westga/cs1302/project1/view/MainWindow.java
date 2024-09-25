@@ -45,6 +45,33 @@ public class MainWindow {
     }
     
     /**
+     * Will soon set quantity for the given food object
+     * @param event the event that happens when button is pushed
+     */
+    @FXML
+    public void setQuantity(ActionEvent event) {
+    	//Code goes here
+    }
+    
+    /**
+     * Will soon increase quantity by 1
+     * @param event the event that happens when button is pushed
+     */
+    @FXML
+    public void increaseQuantity(ActionEvent event) {
+    	//Code goes here
+    }
+    
+    /**
+     * Will soon decrement quantity by 1
+     * @param event the event that happens when button is pushed
+     */
+    @FXML
+    public void decreaseQuantity(ActionEvent event) {
+    	//Code goes here
+    }
+    
+    /**
      * Initializes the fxml elements to make sure they can be injected and work
      */
     @FXML
