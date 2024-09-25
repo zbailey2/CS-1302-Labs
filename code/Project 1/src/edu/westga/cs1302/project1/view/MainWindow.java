@@ -24,6 +24,7 @@ public class MainWindow {
 	
     /**
      * Will add food to pantry later when implemented
+     * @param event the event that happens when button is pushed
      */
     @FXML
     public void addFoodToPantry(ActionEvent event) {
