@@ -48,7 +48,7 @@ public class MainWindow {
     }
     
     /**
-     * Will soon set quantity for the given food object
+     * Sets the quantity of the selected food to whatever value was entered into the text field
      * @param event the event that happens when button is pushed
      */
     @FXML
@@ -70,7 +70,7 @@ public class MainWindow {
     }
     
     /**
-     * Will soon increase quantity by 1
+     * Increases the quantity of the selected food by 1
      * @param event the event that happens when button is pushed
      */
     @FXML
@@ -87,7 +87,7 @@ public class MainWindow {
     }
     
     /**
-     * Will soon decrement quantity by 1
+     * Decreases quantity of selected food by 1
      * @param event the event that happens when button is pushed
      */
     @FXML
@@ -105,8 +105,16 @@ public class MainWindow {
     		errorPopup.setContentText("Unable to decrease further: " + belowZero.getMessage()
     		+ ".");
     		errorPopup.showAndWait();
-    		errorPopup.showAndWait();
     	}
+    }
+    
+    /**
+     * Removes the selected food from the list view
+     * @param event the event that happens when the button is pushed
+     */
+    @FXML
+    public void removeFood(ActionEvent event) {
+    	//Code goes here
     }
     
     /**
