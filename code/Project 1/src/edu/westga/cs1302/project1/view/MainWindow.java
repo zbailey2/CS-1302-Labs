@@ -1,7 +1,9 @@
 package edu.westga.cs1302.project1.view;
 
+import edu.westga.cs1302.project1.model.Food;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -17,10 +19,10 @@ public class MainWindow {
     private TextField foodName;
 
     @FXML
-    private ComboBox<?> foodType;
-
+    private ComboBox<String> foodType;
+    
     @FXML
-    private ListView<?> pantryList;
+    private ListView<Food> pantryList;
 	
     /**
      * Will add food to pantry later when implemented
@@ -28,7 +30,18 @@ public class MainWindow {
      */
     @FXML
     public void addFoodToPantry(ActionEvent event) {
-    	//To-Be Continued
+    	String type = this.foodType.getValue();
+    	String name = this.foodName.getText();
+    	try {
+    		Food currentFood = new Food(name, type);
+    		this.pantryList.getItems().add(currentFood);
+    		this.foodName.clear();
+    	} catch (IllegalArgumentException errorName) {
+    		Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+    		errorPopup.setContentText("Unable to create food: " + errorName.getMessage()
+    		+ ". Please reenter and try again.");
+    		errorPopup.showAndWait();
+    	}
     }
     
     /**
@@ -39,6 +52,6 @@ public class MainWindow {
         assert this.foodName != null : "fx:id=\"foodName\" was not injected: check your FXML file 'MainWindow.fxml'.";
         assert this.foodType != null : "fx:id=\"foodType\" was not injected: check your FXML file 'MainWindow.fxml'.";
         assert this.pantryList != null : "fx:id=\"pantryList\" was not injected: check your FXML file 'MainWindow.fxml'.";
-
+        this.foodType.getItems().addAll("Vegetable", "Meat", "Bread", "Fruit", "Dessert", "Ingredient");
     }
 }

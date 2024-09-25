@@ -17,9 +17,12 @@ public class Food {
 	 * @param name the name of the food
 	 * @param type the type of food it is
 	 */
-	public Food(String name, String type) {
+	public Food(String name, String type) throws IllegalArgumentException {
 		if (name == null) {
 			throw new IllegalArgumentException("Name can not be null");
+		}
+		if (name.isEmpty()) {
+			throw new IllegalArgumentException("Name can not be empty");
 		}
 		if (type == null) {
 			throw new IllegalArgumentException("Type can not be null");
@@ -57,8 +60,7 @@ public class Food {
 	 * returns the name and quantity as a string in this format: name - quantity
 	 * @return returns the name and quantity as a string
 	 */
-	@Override
 	public String toString() {
-		return this.name + "-" + this.quantity;
+		return this.name + " - " + this.quantity;
 	}
 }
