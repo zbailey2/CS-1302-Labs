@@ -1,0 +1,250 @@
+commit 6623ddd19d50af466e649509f8b39a50d3f7587f
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Wed Sep 25 23:09:59 2024 -0400
+
+    Connect Business & UI Logic For Quantity Of Foods
+    
+    1)Implemented the exisiting checkCount method, to check the quantity of the current list using the countPantry method
+    2)Implemented popups to display information of either quantity or if the pantry was empty
+    3)Formatted all classes for final submission
+    4)Fixed all checkstyle errors for final submission
+    5)Slightly tweaked UI placements and names for submission
+
+commit dda5cfd3c840dfcb0c86683dc33b8723165ac0eb
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Wed Sep 25 22:52:13 2024 -0400
+
+    Business Logic for Counting PantryCount
+    
+    1)Implemented a separate class called PantryCount.java, functions as a basic utility class
+    2)Implemented a static method called countPantry, counts the quantities of all foods in the given list and returns it
+    3)Added separate testing package for the new class PantryCount.java
+    4)Added testing for the countPantry() method to ensure all test cases work
+
+commit e16a971bb4f5d9c98a7d9426d8cf9adb398b0ede
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Wed Sep 25 20:44:01 2024 -0400
+
+    Implementing UI for Counting Pantry
+    
+    1) Added a button in the UI for checking the count
+    2) Implemented an empty method in the MainWindow class that the button executes when pressed
+
+commit 5280a315d8bd6f13c914d26b2a47684473036d74
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Wed Sep 25 20:11:03 2024 -0400
+
+    Implementing methods for removing food
+    
+    1)Updated the removeFood() method in order to  clear selected food from listview
+    2)Updated the setQuantity() method to clear values put in after quantity is set
+    3)Added exception handling to removeFood() method to catch any user errors, such as no student selected to remove
+
+commit e96ca919b004911498234daaaa6a1dcc556a0102
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Wed Sep 25 19:26:19 2024 -0400
+
+    Implemented UI for Remoing Food
+    
+    1) Added a button in the Mainwindow and UI elements to remove food
+    2) Added an empty method for remove food in the Mainwindow class
+    3) Fixed a bug in the decreaseQuantity method that made error messages show up twice
+
+commit b36394a55721a5c29ff463ac12e2e2d91cc5f787
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Wed Sep 25 19:01:42 2024 -0400
+
+    Connecting Business and UI logic for Quantity
+    
+    1)Updated setQuantity method in Mainwindow class to set selected foods quantity to given value
+    2)Updated increaseQuantity method in Mainwindow class to increase quantity of selected food by one
+    3)Updated dereasecQuantity method in Mainwindow class to decrease quantity of selected food by one
+    4)Added exception handling for quantity methods in MainWindow to catch any illegal arguments
+    5)Fixed any existing checkstyle errors
+
+commit 022adabc09366100c65c0e54b534d1d516af9b32
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Wed Sep 25 17:26:16 2024 -0400
+
+    Business Logic for Updating Quantity
+    
+    1) Added a setQuantity() method to set a given quantity
+    2) Added a increaseQuantity() method to increase quantity by 1
+    3) Added a decreaseQuantity() method to decrease quantity by 1
+    4) Implemented test cases for all of the Quantity associated methods
+    5) Fixed existing check style errors throughout project
+
+commit 1d7fcebeccaaabb0c6648474b2e720e10ba0baa4
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Wed Sep 25 02:52:14 2024 -0400
+
+    Implementing UI for Quantity
+    
+    1) Created textfield, button, and label for setting quantity
+    2) Created button for incrementing the quantity
+    3) Created button for decrementing the quantity
+    4) Created shell methods with nothing implemented where code will go for the newly added UI elements
+
+commit ece9ca1486669a60ea769f858c6b40c39ea032c4
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Tue Sep 24 23:55:08 2024 -0400
+
+    Connecting UI and Business Logic
+    
+    1) Initalized a Combobox with Strings for the type of food
+    2) Implemented the addFood() method to the MainWindow class
+    3) Added Exception Handling to the addFood() method
+    4) Ease of access changes, clearing inputted values for Food in TextField
+    5) Fixed toString() so that it creates spaces in text
+
+commit 5e8105cc250c44fa95e4a7117a43265e5a46fb4d
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Tue Sep 24 21:31:14 2024 -0400
+
+    Business Logic for Storing a Food
+    
+    1)Added a constructor in the food class to create a foodobject with a name, type, and quantity
+    2)Created necessay getter methods for each field
+    3)Implemented a toString() method that returns a string with the name and quantity
+    4)Added testing for the Food constructor to ensure it works
+
+commit 80ecfd742bfe8615f374993feaf5d51b290b323c
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Tue Sep 24 19:55:35 2024 -0400
+
+    UI for adding food
+    
+    1) Added a label and textfield in fxml/Mainwindow class to insert food name
+    2) Added a label and combobox in fxml/Mainwindow class to enter the type of food
+    3) Added a button that has an associated addFoodToPantry method in the MainWindow class.
+    4) Added a listview property in the fxml/MainWindow class in order to select food from pantry
+
+commit abc0239cdd91a54eb002c62104760457b0b97a9c
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Thu Sep 19 15:55:00 2024 -0400
+
+    Added Git Log and Basic Package Structure
+    
+    1)Added the gitlog with url for github repo
+    2)Fixed package structure for pathway to work
+    3)Began implementing pantry class
+
+commit 151df56aecfe9da3d520c4a91a79cc312afb0db2
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Thu Sep 19 15:35:26 2024 -0400
+
+    Initialized the Project 1 to Repo
+    
+    1)Set up project file for Project 1
+
+commit 651c133f68f9482ad24cc7494735dce79485de9c
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Thu Sep 19 00:50:34 2024 -0400
+
+    Implemented Static Bill Calculations
+    
+    1)Added static methods for subtotal, tax, tip, in BillCalculator so that calculations can be made without
+      pertaining to the Bill object, but to a class
+    2)Made it so that methods took a Array list of BillItems as a parameter because assignment specified me too
+    3)Added JUnit testing for the static methods implemented to make sure new methods work, and values always got
+      constructed correctly.
+    4)Deleted unnecessary code(getSubtotal, getTotal, getTip, getTax) from Bill class since it was not needed anymore
+    5)Fixed Checkstyle errors
+
+commit c1133116977628ccac0fc25c5833aed331322cae
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Thu Sep 12 15:51:27 2024 -0400
+
+    Final Values in BillItem Class
+    
+    1) Made name and amount final to ensure that once the field is set, that these values can not be changed
+
+commit 2645f8eb3edb7bdff6aa9d887021459333683b8e
+Merge: 63e9f44 3bd96a0
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Thu Sep 12 15:40:29 2024 -0400
+
+    Merge branch 'main' of https://github.com/zbailey2/CS-1302-Labs
+
+commit 63e9f44f6d5ad2f4e312e1d86f4a583c5510f868
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Thu Sep 12 15:35:03 2024 -0400
+
+    Initialize Lab 4 in Repository
+    
+    1)Added the BillSystem file into the repository to work on
+
+commit 3b446d648234dbe64b47245cf29fc75e3ee4793a
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Wed Sep 11 23:12:57 2024 -0400
+
+    CheckStyle Errors
+    
+    1)Fixed the one checkstyle error
+
+commit 3bd96a0a72fe45d4de2183f0114746cf3000bc16
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Wed Sep 11 23:12:57 2024 -0400
+
+    CheckStyle Errors
+    
+    1)Fixed the one checkstyle error
+
+commit a84fa4f3a692b3061942c8e7f96903df8ad2ef5b
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Wed Sep 11 23:07:50 2024 -0400
+
+    Separation Of Concerns and Tes Cases
+    
+    1)Moved the getAverage math into the model student package
+    2)Converted the ListView students into an arraylist of students to pass through the getAverage method
+    3)Implemented the rest of the code behind material in the initalize() method
+    4)Implemented testing for the getAverage method
+    5)Updated testing for the Student constructor
+
+commit 30cc82f9b65367041fd0b8e475674d47683371b9
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Sat Sep 7 02:52:22 2024 -0400
+
+    Implemented Grading Average and UI Changes
+    
+    1) Added a getAverageOfClass() method which updates class average whenever a student is added/removed
+    2) Updated the viewGrade() method so that it no longer requires a button, rather pressing on selected student
+    3) Updated the UI so that whenever a student is added or removed the Grade for past student is cleared
+
+commit 9a00bb967487e59e93e547d7f63deecff52a72f0
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Thu Sep 5 21:31:37 2024 -0400
+
+    Fixed Rounding In Decimal Cases
+    
+    1)Updated constructor to round grade values 2 decimal places
+    2)Allowed displayed grades to be rounded 2 decimal spots
+
+commit 2d4e16bf9c7facdac3d28818025b41ca986a5ea6
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Thu Sep 5 21:01:56 2024 -0400
+
+    Implemented a Method To Check Grades
+    
+    1)Replaced all Int instanes of grade with doubles
+    2)Updated test methods to test for grade variables in the student object
+    3)Implemented a viewGrade method in order to check grade of selected student
+    4)Updated fxml properties to include a new button and label to select and view chosen student grade
+
+commit 0b93bfac5ad3a82d10c44482ff2eb473349007d7
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Thu Sep 5 16:35:55 2024 -0400
+
+    Added Lab 3 To GitHub Repo and Implemented In Class Changes
+    
+    1)Updated Student class to include a Int Grade
+    2)Updated the removeStudent() method in class
+    3)Updated the error/exception handling in the MainWindow class
+    4)Updated GUI in the fxml file to include grades
+
+commit 9f68590445c547a1034d9a66aeb9af971a311adb
+Author: Zachary Bailey <zbailey2@my.westga.edu>
+Date:   Thu Sep 5 15:34:21 2024 -0400
+
+    Initial commit
