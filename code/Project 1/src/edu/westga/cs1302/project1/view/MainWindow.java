@@ -58,6 +58,7 @@ public class MainWindow {
     		int quantity = Integer.parseInt(this.quantity.getText());
     		selectedFood.setQuantity(quantity);
     		this.pantryList.refresh();
+    		this.quantity.clear();
     	} catch (IllegalArgumentException invalidQuantity) {
     		Alert errorPopup = new Alert(Alert.AlertType.ERROR);
     		errorPopup.setContentText("Unable to set quantity please enter valid number and try again.");
@@ -114,7 +115,14 @@ public class MainWindow {
      */
     @FXML
     public void removeFood(ActionEvent event) {
-    	//Code goes here
+    	Food selectedFood = this.pantryList.getSelectionModel().getSelectedItem();
+    	if (selectedFood != null) {
+    		this.pantryList.getItems().remove(selectedFood);
+    	} else {
+    		Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+    		errorPopup.setContentText("Unable to remove student, please select student to remove.");
+    		errorPopup.showAndWait();
+    	}
     }
     
     /**
