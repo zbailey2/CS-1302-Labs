@@ -126,6 +126,15 @@ public class MainWindow {
     }
     
     /**
+     * Checks the current count of objects in the pantry
+     * @param event the event that happens when the button is pushed
+     */
+    @FXML
+    public void checkCount(ActionEvent event) {
+    	//Code goes here
+    }
+    
+    /**
      * Initializes the fxml elements to make sure they can be injected and work
      */
     @FXML
