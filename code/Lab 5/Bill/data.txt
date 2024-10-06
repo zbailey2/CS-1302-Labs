@@ -1,7 +1,2 @@
 Server: No Server Set
-Corn - 10.0
-Milk - 5.0
-Subtotal: 15.0
-Tax: 1.5
-Tip: 3.0
-Total: 19.5
+tom - 12.0

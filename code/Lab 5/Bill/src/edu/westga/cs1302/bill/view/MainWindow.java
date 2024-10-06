@@ -1,5 +1,6 @@
 package edu.westga.cs1302.bill.view;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import edu.westga.cs1302.bill.model.Bill;
@@ -74,7 +75,22 @@ public class MainWindow {
     
     @FXML
     void loadBillData(ActionEvent event) {
-    	//Code goes here
+    	this.receiptArea.clear();
+    	try {
+    		this.bill = BillPersistenceManager.loadBillData();
+    		this.bill.setServerName(this.bill.getServerName());
+    		this.updateReceipt();
+    	} catch (FileNotFoundException noFile) {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setHeaderText("Unable to load file");
+    		alert.setContentText("File could not be located");
+    		alert.showAndWait();
+    	} catch (IOException parseError) {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setHeaderText("File not in valid format");
+    		alert.setContentText("The data in this file could not be read correctly");
+    		alert.showAndWait();
+    	}
     }
 
     @FXML
@@ -83,7 +99,7 @@ public class MainWindow {
         this.serverName.getItems().add("Alice");
         this.serverName.getItems().add("Trudy");
         this.bill = new Bill();
-    	this.updateReceipt();
+        this.updateReceipt();
     }
 }
 
