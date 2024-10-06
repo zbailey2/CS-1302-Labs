@@ -1,7 +1,10 @@
 package edu.westga.cs1302.bill.view;
 
+import java.io.IOException;
+
 import edu.westga.cs1302.bill.model.Bill;
 import edu.westga.cs1302.bill.model.BillItem;
+import edu.westga.cs1302.bill.model.BillPersistenceManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -58,9 +61,15 @@ public class MainWindow {
 
     @FXML
     void saveBillData(ActionEvent event) {
-		Alert alert = new Alert(Alert.AlertType.ERROR);
-		alert.setContentText("Operation not yet implemented!");
-		alert.showAndWait();
+		try {
+			Bill bill = this.bill;
+			BillPersistenceManager.saveBillData(bill);
+		} catch (IOException errorSaving) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setHeaderText("Unable to save data");
+    		alert.setContentText("The data in the bill was unable to save. Please try again");
+    		alert.showAndWait();
+		}
     }
 
     @FXML
