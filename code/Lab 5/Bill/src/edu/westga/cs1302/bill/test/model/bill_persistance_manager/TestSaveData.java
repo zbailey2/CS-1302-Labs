@@ -50,6 +50,7 @@ public class TestSaveData {
 		File inputFile = new File(BillPersistenceManager.DATA_FILE);
 		try(Scanner reader = new Scanner(inputFile)){
 			assertEquals("Server: No Server Set", reader.nextLine());
+			assertEquals("Chicken - 10.0", reader.nextLine());
 			assertEquals("Subtotal: 10.0", reader.nextLine());
 			assertEquals("Tax: 1.0", reader.nextLine());
 			assertEquals("Tip: 2.0", reader.nextLine());
@@ -73,6 +74,9 @@ public class TestSaveData {
 		File inputFile = new File(BillPersistenceManager.DATA_FILE);
 		try(Scanner reader = new Scanner(inputFile)){
 			assertEquals("Server: No Server Set", reader.nextLine());
+			assertEquals("Chicken - 10.0", reader.nextLine());
+			assertEquals("Rice - 5.0", reader.nextLine());
+			assertEquals("Salt - 3.0", reader.nextLine());
 			assertEquals("Subtotal: 18.0", reader.nextLine());
 			assertEquals("Tax: 1.8", reader.nextLine());
 			assertEquals("Tip: 3.6", reader.nextLine());
@@ -98,6 +102,7 @@ public class TestSaveData {
 		File inputFile = new File(BillPersistenceManager.DATA_FILE);
 		try(Scanner reader = new Scanner(inputFile)){
 			assertEquals("Server: No Server Set", reader.nextLine());
+			assertEquals("Rice - 5.0", reader.nextLine());
 			assertEquals("Subtotal: 5.0", reader.nextLine());
 			assertEquals("Tax: 0.5", reader.nextLine());
 			assertEquals("Tip: 1.0", reader.nextLine());

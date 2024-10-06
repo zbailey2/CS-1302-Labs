@@ -71,6 +71,11 @@ public class MainWindow {
     		alert.showAndWait();
 		}
     }
+    
+    @FXML
+    void loadBillData(ActionEvent event) {
+    	//Code goes here
+    }
 
     @FXML
     void initialize() {
