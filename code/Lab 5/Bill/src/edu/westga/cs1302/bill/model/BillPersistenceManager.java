@@ -47,6 +47,7 @@ public class BillPersistenceManager {
 	 * 
 	 * @return the bill loaded
 	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
 	public static Bill loadBillData() throws FileNotFoundException, IOException {
 		Bill bill = new Bill();
