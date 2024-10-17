@@ -62,11 +62,7 @@ public class CSVBillPersistenceManager extends BillPersistenceManager {
 				String[] itemData = reader.nextLine().strip().split(",");
 				bill.addItem(new BillItem(itemData[0], Double.parseDouble(itemData[1])));
 			}
-		} catch (NumberFormatException numError) {
-			throw new IOException("Unable to read cash amount");
-		} catch (IllegalArgumentException billDataError) {
-			throw new IOException("Unable to create bill, bad name/cost");
-		} catch (IndexOutOfBoundsException billDataError) {
+		} catch (Exception error) {
 			bill = new Bill();
 		}
 		return bill;

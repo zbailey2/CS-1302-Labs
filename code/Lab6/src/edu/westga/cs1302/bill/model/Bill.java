@@ -1,6 +1,7 @@
 package edu.westga.cs1302.bill.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Manages a set of BillItems.
@@ -81,5 +82,12 @@ public class Bill {
 	public BillItem[] getItems() {
 		return this.items.toArray(new BillItem[this.items.size()]);
 	}
-
+	
+	/**
+	 * Sorts an array depending on order
+	 * @param value the value to sort
+	 */
+	public void sort(Comparator<BillItem> value) {
+		this.items.sort(value);
+	}
 }

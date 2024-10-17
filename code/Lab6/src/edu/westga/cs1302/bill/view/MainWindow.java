@@ -2,12 +2,15 @@ package edu.westga.cs1302.bill.view;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Comparator;
 
 import edu.westga.cs1302.bill.model.Bill;
 import edu.westga.cs1302.bill.model.BillItem;
 import edu.westga.cs1302.bill.model.BillPersistenceManager;
 import edu.westga.cs1302.bill.model.CSVBillPersistenceManager;
 import edu.westga.cs1302.bill.model.TSVBillPersistenceManager;
+import edu.westga.cs1302.bill.model.BillAscendingCostComparator;
+import edu.westga.cs1302.bill.model.BillDescendingCostComparator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -34,6 +37,8 @@ public class MainWindow {
 	private ComboBox<String> serverName;
 	@FXML
 	private ComboBox<BillPersistenceManager> format;
+	@FXML
+    private ComboBox<Comparator<BillItem>> order;
 
 	@FXML
 	void addItem(ActionEvent event) {
@@ -42,6 +47,7 @@ public class MainWindow {
 			this.bill.addItem(item);
 			this.name.clear();
 			this.amount.clear();
+			this.changeOrder(event);
 			this.updateReceipt();
 		} catch (NumberFormatException numError) {
 			this.displayErrorPopup("Invalid amount provided, please correct and try again.");
@@ -84,6 +90,12 @@ public class MainWindow {
 	}
 	
 	@FXML
+	void changeOrder(ActionEvent event) {
+		this.bill.sort(this.order.getValue());
+		this.updateReceipt();
+	}
+	
+	@FXML
 	void initialize() {
 		assert this.amount != null : "fx:id=\"amount\" was not injected: check your FXML file 'MainWindow.fxml'.";
 		assert this.format != null : "fx:id=\"format\" was not injected: check your FXML file 'MainWindow.fxml'.";
@@ -92,6 +104,7 @@ public class MainWindow {
 				: "fx:id=\"receiptArea\" was not injected: check your FXML file 'MainWindow.fxml'.";
 		assert this.serverName != null
 				: "fx:id=\"serverName\" was not injected: check your FXML file 'MainWindow.fxml'.";
+		 assert this.order != null : "fx:id=\"order\" was not injected: check your FXML file 'MainWindow.fxml'.";
 
 		// Formats the ComboBox For Server Names
 		this.serverName.getItems().add("Bob");
@@ -101,8 +114,13 @@ public class MainWindow {
 		// Formats the ComboBox For Saving Methods
 		this.format.getItems().add(new CSVBillPersistenceManager());
 		this.format.getItems().add(new TSVBillPersistenceManager());
-		
 		this.format.setValue(this.format.getItems().get(0));
+		
+		//Formats the ComboBox for Changing Order
+		this.order.getItems().add(new BillAscendingCostComparator());
+		this.order.getItems().add(new BillDescendingCostComparator());
+		
+		this.order.setValue(this.order.getItems().get(0));
 		
 		try {
 			this.bill = this.format.getValue().loadBillData();
@@ -111,7 +129,6 @@ public class MainWindow {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setContentText("No save data file found, loading with no bill data");
 			alert.showAndWait();
-			this.bill = new Bill();
 		} catch (IOException parseError) {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setHeaderText("File not in valid format, creating new bill");
