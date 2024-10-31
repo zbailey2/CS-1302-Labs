@@ -1,5 +1,7 @@
 package edu.westga.cs1302.project2.view;
 
+import java.util.Comparator;
+
 import edu.westga.cs1302.project2.model.Ingredient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +20,7 @@ public class MainWindow {
 	@FXML private ComboBox<String> ingredientType;
 	@FXML private ListView<Ingredient> ingredientsList;
 	@FXML private TextField ingredientName;
+	@FXML private ComboBox<Comparator<Ingredient>> sortType;
 
 	@FXML
 	void addIngredient(ActionEvent event) {
@@ -43,11 +46,15 @@ public class MainWindow {
 
 	@FXML
 	void initialize() {
+		assert this.ingredientName != null : "fx:id=\"ingredientName\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert this.ingredientType != null : "fx:id=\"ingredientType\" was not injected: check your FXML file 'MainWindow.fxml'.";
+        assert this.ingredientsList != null : "fx:id=\"ingredientsList\" was not injected: check your FXML file 'MainWindow.fxml'.";
+		assert this.sortType != null : "fx:id=\"sortType\" was not injected: check your FXML file 'MainWindow.fxml'.";
+		
 		this.ingredientType.getItems().add("Vegetable");
 		this.ingredientType.getItems().add("Meat");
 		this.ingredientType.getItems().add("Bread");
 		this.ingredientType.getItems().add("Fruit");
 		this.ingredientType.getItems().add("Spice");
-
 	}
 }
