@@ -1,4 +1,4 @@
-package edu.westga.cs1302.project2.test.model.ingredient;
+package edu.westga.cs1302.project2.test.ingredient;
 
 import static org.junit.jupiter.api.Assertions.*;
 
