@@ -50,5 +50,4 @@ public class Ingredient {
 	public String toString() {
 		return this.name + "-" + this.type;
 	}
-	
 }
