@@ -1,5 +1,7 @@
 package edu.westga.cs1302.project2.view;
 
+import java.awt.TextArea;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -28,6 +30,7 @@ public class MainWindow {
 	@FXML private ComboBox<Comparator<Ingredient>> sortType;
 	@FXML private ListView<Ingredient> recipeList;
 	@FXML private TextField recipeName;
+	@FXML private TextArea recipeBook;
 
 	@FXML
 	void addIngredient(ActionEvent event) {
@@ -60,8 +63,13 @@ public class MainWindow {
 	
 	@FXML
 	void addIngredientToRecipe(ActionEvent event) {
-		Ingredient selectedIngredient = this.ingredientsList.getSelectionModel().getSelectedItem();
-		if (selectedIngredient != null) {
+		Ingredient selectedIngredient = this.ingredientsList.getSelectionModel().getSelectedItem();  
+		if (selectedIngredient == null) {
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setHeaderText("Unable to add ingredient");
+			alert.setContentText("No ingredient chosen please try again");
+			alert.showAndWait();
+		} else {
 			this.recipeList.getItems().add(selectedIngredient);
 		}
 	}
@@ -81,6 +89,11 @@ public class MainWindow {
 				writer.recipeSaver(recipe);
 				this.recipeName.clear();
 				this.recipeList.getItems().clear();
+			} catch (FileNotFoundException fileNotFound) {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("File Not Found");
+				alert.setContentText("The file to save to could not be found");
+				alert.showAndWait();
 			} catch (IOException ioException) {
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setTitle("Error Saving Recipe");
@@ -109,6 +122,7 @@ public class MainWindow {
 		assert this.sortType != null : "fx:id=\"sortType\" was not injected: check your FXML file 'MainWindow.fxml'.";
 		assert this.recipeList != null : "fx:id=\"recipeList\" was not injected: check your FXML file 'MainWindow.fxml'.";
 	    assert this.recipeName != null : "fx:id=\"recipeName\" was not injected: check your FXML file 'MainWindow.fxml'.";
+	    assert this.recipeBook != null : "fx:id=\"recipeBook\" was not injected: check your FXML file 'MainWindow.fxml'.";
 		
 		//Initializes the Ingredients Type ComboBox
 		this.ingredientType.getItems().add("Vegetable");

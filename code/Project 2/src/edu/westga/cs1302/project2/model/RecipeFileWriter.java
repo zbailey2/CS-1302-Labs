@@ -1,6 +1,7 @@
 package edu.westga.cs1302.project2.model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -23,7 +24,7 @@ public class RecipeFileWriter {
 	 * @throws IOException           if there is any other issues in to IO process
 	 * 
 	 */
-	public void recipeSaver(Recipe recipe) throws IOException, IllegalStateException {
+	public void recipeSaver(Recipe recipe) throws IOException, IllegalStateException, FileNotFoundException {
 		if (recipe == null) {
 			throw new IllegalArgumentException("Recipe can not be null");
 		}
@@ -35,6 +36,8 @@ public class RecipeFileWriter {
 					throw new IllegalStateException("recipe already exists");
 				}
 			}
+		} catch (FileNotFoundException fileNotFound) {
+			throw new FileNotFoundException("Error, file could not be found");
 		}
 		try (FileWriter writer = new FileWriter(DATA_FILE, true)) {
 			writer.write(Utility.recipeToString(recipe));
