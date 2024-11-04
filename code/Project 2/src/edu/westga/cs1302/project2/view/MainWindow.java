@@ -1,9 +1,12 @@
 package edu.westga.cs1302.project2.view;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import edu.westga.cs1302.project2.model.IngredientNameComparator;
 import edu.westga.cs1302.project2.model.IngredientTypeComparator;
-
+import edu.westga.cs1302.project2.model.Recipe;
+import edu.westga.cs1302.project2.model.RecipeFileWriter;
 import edu.westga.cs1302.project2.model.Ingredient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,6 +56,48 @@ public class MainWindow {
 	@FXML
 	void sortIngredients(ActionEvent event) {
 		this.ingredientsList.getItems().sort(this.sortType.getValue());
+	}
+	
+	@FXML
+	void addIngredientToRecipe(ActionEvent event) {
+		Ingredient selectedIngredient = this.ingredientsList.getSelectionModel().getSelectedItem();
+		if (selectedIngredient != null) {
+			this.recipeList.getItems().add(selectedIngredient);
+		}
+	}
+	
+	@FXML
+	void createRecipe(ActionEvent event) {
+		Recipe recipe = null;
+		String recipeName = this.recipeName.getText();
+		ArrayList<Ingredient> ingredients = new ArrayList<>();
+		for (Ingredient ingredient : this.recipeList.getItems()) {
+			ingredients.add(ingredient);
+		}
+		try {
+			recipe = new Recipe(recipeName, ingredients);
+			try {
+				RecipeFileWriter writer = new RecipeFileWriter();						
+				writer.recipeSaver(recipe);
+				this.recipeName.clear();
+				this.recipeList.getItems().clear();
+			} catch (IOException ioException) {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Error Saving Recipe");
+				alert.setContentText("There was an error saving the recipe");
+				alert.showAndWait();
+			} catch (IllegalStateException repeatRecipe) {
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Recipe Already Exists");
+				alert.setContentText("The recipe youre attempting to save already exists");
+				alert.showAndWait();
+			}
+		} catch (IllegalArgumentException illegalArguments) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("More information needed");
+			alert.setContentText("Please enter a name and at least one ingredient");
+			alert.showAndWait();
+		}
 	}
 
 	@FXML

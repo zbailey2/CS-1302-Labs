@@ -24,11 +24,11 @@ public class Utility {
 		ArrayList<Ingredient> ingredients = recipe.getIngredients();
 		
 		for (int index = 0; index < ingredients.size(); index++) {
-			result += ingredients.get(index).toString() + System.lineSeparator();
+			result += ingredients.get(index);
 			if (index < ingredients.size() - 1) {
 				result += ", ";
 			}
 		}
-		return result;
+		return result + System.lineSeparator();
 	}
 }

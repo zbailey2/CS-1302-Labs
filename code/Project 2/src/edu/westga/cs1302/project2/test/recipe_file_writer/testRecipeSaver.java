@@ -1,13 +1,14 @@
 package edu.westga.cs1302.project2.test.recipe_file_writer;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import edu.westga.cs1302.project2.model.Ingredient;
@@ -16,10 +17,18 @@ import edu.westga.cs1302.project2.model.RecipeFileWriter;
 
 public class testRecipeSaver {
 	
+@Before
+public void clearFile() throws IOException{
+	FileWriter writer = new FileWriter(RecipeFileWriter.DATA_FILE, false);
+	writer.write("");
+	writer.close();
+}
+
 	@Test
 	public void testNullRecipe() {
 		assertThrows(IllegalArgumentException.class, ()->{
-			RecipeFileWriter.recipeSaver(null);
+			RecipeFileWriter writer = new RecipeFileWriter();
+			writer.recipeSaver(null);
 		});
 	}
 	
@@ -32,7 +41,8 @@ public class testRecipeSaver {
 		ingredients.add(ingredient1);
 		
 		Recipe recipe = new Recipe(recipeName, ingredients);
-		RecipeFileWriter.recipeSaver(recipe);
+		RecipeFileWriter writer = new RecipeFileWriter();
+		writer.recipeSaver(recipe);
 		
 		File inputFile = new File(RecipeFileWriter.DATA_FILE);
 		try(Scanner reader = new Scanner(inputFile)){
@@ -50,15 +60,17 @@ public class testRecipeSaver {
 		ingredients.add(ingredient1);
 		
 		Recipe recipe = new Recipe(recipeName, ingredients);
-		RecipeFileWriter.recipeSaver(recipe);
+		RecipeFileWriter writer = new RecipeFileWriter();				
+		writer.recipeSaver(recipe);
 		
 		String recipeName2 = "Apple";
 		ArrayList<Ingredient> ingredients2 = new ArrayList<Ingredient>();
 		
 		Ingredient ingredient3 = new Ingredient("Apple", "Fruit");
 		ingredients2.add(ingredient3);		
-		Recipe recipe2 = new Recipe(recipeName2, ingredients2);
-		RecipeFileWriter.recipeSaver(recipe2);
+		Recipe recipe2 = new Recipe(recipeName2, ingredients2);			
+		writer.recipeSaver(recipe2);
+
 
 		
 		File inputFile = new File(RecipeFileWriter.DATA_FILE);
@@ -76,9 +88,10 @@ public class testRecipeSaver {
 		ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 		
 		Ingredient ingredient1 = new Ingredient("Red Sauce", "Sauce");
-		ingredients.add(ingredient1);
+		ingredients.add(ingredient1);		
 		Recipe recipe = new Recipe(recipeName, ingredients);
-		RecipeFileWriter.recipeSaver(recipe);
+		RecipeFileWriter writer = new RecipeFileWriter();				
+		writer.recipeSaver(recipe);
 		
 		String recipeName2 = "Lasagna";
 		ArrayList<Ingredient> ingredients2 = new ArrayList<Ingredient>();
@@ -87,8 +100,8 @@ public class testRecipeSaver {
 		ingredients2.add(ingredient2);
 		Recipe recipe2 = new Recipe(recipeName2, ingredients2);
 		
-		assertThrows(IllegalStateException.class, ()->{
-			RecipeFileWriter.recipeSaver(recipe2);
+		assertThrows(IllegalStateException.class, ()->{			
+			writer.recipeSaver(recipe2);
 		});
 	}
 }

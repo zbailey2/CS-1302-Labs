@@ -23,7 +23,7 @@ public class TestRecipeToString {
 		ingredients.add(ingredient2);
 		
 		Recipe recipe = new Recipe(recipeName, ingredients);
-		String expected = "Spaghetti and Meatballs\nSpaghetti-Pasta, Meatballs-Meat";
+		String expected = "Spaghetti and Meatballs"+System.lineSeparator()+"Spaghetti-Pasta, Meatballs-Meat"+System.lineSeparator();
 		assertEquals(expected, Utility.recipeToString(recipe));
 	}
 	
@@ -40,9 +40,7 @@ public class TestRecipeToString {
 		ingredients.add(ingredient1);
 		
 		Recipe recipe = new Recipe(recipeName, ingredients);
-		String expected = "Apple\nApple-Fruit";
+		String expected = "Apple"+System.lineSeparator()+"Apple-Fruit"+System.lineSeparator();
 		assertEquals(expected, Utility.recipeToString(recipe));
 	}
-	
-	//No need to test with empty name/ingredients list since those cannot be passed into recipe empty.
 }
