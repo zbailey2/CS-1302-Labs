@@ -2,3 +2,15 @@ Spaghetti and Meatballs
 Spaghetti-Pasta
 Two Steak Dinner
 Steak-Meat,Steak-Meat
+Steak Dinner
+Steak-Meat
+Spaghetti
+Spaghetti-Bread
+Cheese Dip
+Cheese-Meat
+Cheese Fries
+Cheese-Meat,Fries-Fruit
+Carrot Cake
+Carrot-Vegetable
+Cheesy Carrots
+Cheese-Meat,Carrot-Vegetable

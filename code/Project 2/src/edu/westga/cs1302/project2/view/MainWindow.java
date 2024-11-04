@@ -7,7 +7,9 @@ import java.util.Comparator;
 import edu.westga.cs1302.project2.model.IngredientNameComparator;
 import edu.westga.cs1302.project2.model.IngredientTypeComparator;
 import edu.westga.cs1302.project2.model.Recipe;
+import edu.westga.cs1302.project2.model.RecipeFileReader;
 import edu.westga.cs1302.project2.model.RecipeFileWriter;
+import edu.westga.cs1302.project2.model.Utility;
 import edu.westga.cs1302.project2.model.Ingredient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -110,6 +112,42 @@ public class MainWindow {
 			alert.setTitle("More information needed");
 			alert.setContentText("Please enter a name and at least one ingredient");
 			alert.showAndWait();
+		}
+	}
+	
+	@FXML 
+	void specificIngredient(ActionEvent event) throws IOException, FileNotFoundException {
+		Ingredient ingredient = this.ingredientsList.getSelectionModel().getSelectedItem();
+		if (ingredient == null) {
+			Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+			errorPopup.setHeaderText("Cannot show recipes");
+			errorPopup.setContentText("Please select an ingredient");
+			errorPopup.showAndWait();
+		} else {
+			String ingredientName = ingredient.getName();
+			try {
+				RecipeFileReader reader = new RecipeFileReader();
+				ArrayList<Recipe> allRecipes = reader.specificRecipe(ingredientName);
+				try {
+					String recipeBook = Utility.listToString(allRecipes);
+					this.recipeBook.setText(recipeBook);
+				} catch (IllegalArgumentException illegalArgument) {
+					Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+					errorPopup.setHeaderText("Cannot show recipes");
+					errorPopup.setContentText("Make sure recipes exist before searching");
+					errorPopup.showAndWait();
+				}
+			} catch (FileNotFoundException fileNotFound) {
+				Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+				errorPopup.setHeaderText("File Not Located");
+				errorPopup.setContentText("The file could not be found! Creating file with empty list");
+				errorPopup.showAndWait();
+			} catch (IOException ioException) {
+				Alert errorPopup = new Alert(Alert.AlertType.ERROR);
+				errorPopup.setHeaderText("Error loading recipes");
+				errorPopup.setContentText("An error has occured loading the recipes");
+				errorPopup.showAndWait();
+			}
 		}
 	}
 

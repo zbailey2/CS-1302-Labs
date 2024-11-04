@@ -29,6 +29,6 @@
       <TextField fx:id="recipeName" layoutX="426.0" layoutY="16.0" />
       <Button layoutX="541.0" layoutY="330.0" mnemonicParsing="false" onAction="#createRecipe" prefHeight="42.0" prefWidth="90.0" text="Add Recipe" />
       <TextArea fx:id="recipeBook" layoutX="343.0" layoutY="381.0" prefHeight="200.0" prefWidth="283.0" />
-      <Button layoutX="410.0" layoutY="591.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="150.0" text="Recipes With Ingredient" />
+      <Button layoutX="410.0" layoutY="591.0" mnemonicParsing="false" onAction="#specificIngredient" prefHeight="42.0" prefWidth="150.0" text="Recipes With Ingredient" />
    </children>
 </AnchorPane>
