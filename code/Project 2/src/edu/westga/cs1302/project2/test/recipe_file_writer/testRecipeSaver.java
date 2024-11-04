@@ -19,9 +19,9 @@ public class testRecipeSaver {
 	
 @Before
 public void clearFile() throws IOException{
-	FileWriter writer = new FileWriter(RecipeFileWriter.DATA_FILE, false);
-	writer.write("");
-	writer.close();
+	try(FileWriter writer = new FileWriter(RecipeFileWriter.DATA_FILE, false)){
+		writer.write("");
+	}
 }
 
 	@Test

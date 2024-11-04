@@ -26,9 +26,28 @@ public class Utility {
 		for (int index = 0; index < ingredients.size(); index++) {
 			result += ingredients.get(index);
 			if (index < ingredients.size() - 1) {
-				result += ", ";
+				result += ",";
 			}
 		}
 		return result + System.lineSeparator();
+	}
+	
+	/**
+	 * Takes a list of recipes and converts them to a String
+	 * @param recipes an ArrayList of recipes
+	 * @return a string of all recipes
+	 */
+	public static String listToString(ArrayList<Recipe> recipes) {
+		if (recipes == null) {
+			throw new IllegalArgumentException("recipe can not be null");
+		}
+		String result = "";
+		for (int index = 0; index < recipes.size(); index++) {
+			result += recipeToString(recipes.get(index));
+			if (index < recipes.size() - 1) {
+				result += System.lineSeparator();
+			}
+		}
+		return result;
 	}
 }

@@ -23,7 +23,7 @@ public class TestRecipeToString {
 		ingredients.add(ingredient2);
 		
 		Recipe recipe = new Recipe(recipeName, ingredients);
-		String expected = "Spaghetti and Meatballs"+System.lineSeparator()+"Spaghetti-Pasta, Meatballs-Meat"+System.lineSeparator();
+		String expected = "Spaghetti and Meatballs"+System.lineSeparator()+"Spaghetti-Pasta,Meatballs-Meat"+System.lineSeparator();
 		assertEquals(expected, Utility.recipeToString(recipe));
 	}
 	

@@ -32,7 +32,7 @@ public class RecipeFileWriter {
 		try (Scanner reader = new Scanner(inputFile)) {
 			while (reader.hasNextLine()) {
 				String currentLine = reader.nextLine();
-				if (currentLine.equals(recipe.getName())) {
+				if (currentLine.equalsIgnoreCase(recipe.getName())) {
 					throw new IllegalStateException("recipe already exists");
 				}
 			}
