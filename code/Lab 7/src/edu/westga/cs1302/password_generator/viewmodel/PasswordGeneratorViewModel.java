@@ -94,9 +94,6 @@ public class PasswordGeneratorViewModel {
 		} catch (NumberFormatException noNegatives) {
 			this.errorMessage.setValue("Length must be a positive integer");
 			return;
-		} catch (IllegalArgumentException tooLow) {
-			this.errorMessage.setValue("Length can not be below 1");
-			return;
 		}
 		Random randomNumberGenerator = new Random();
 		try {
