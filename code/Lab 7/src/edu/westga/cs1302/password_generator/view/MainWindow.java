@@ -54,6 +54,5 @@ public class MainWindow {
     @FXML
     void initialize() {
         this.bindComponentsToViewModel();
-        this.minimumLength.setText("1");
     }
 }
