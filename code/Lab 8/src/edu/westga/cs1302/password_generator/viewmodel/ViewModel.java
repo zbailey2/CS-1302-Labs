@@ -1,12 +1,15 @@
 package edu.westga.cs1302.password_generator.viewmodel;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import edu.westga.cs1302.password_generator.model.PasswordGenerator;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 
 /** Manages utilizing the model and makes properties available to bind the UI elements.
  * 
@@ -18,11 +21,11 @@ public class ViewModel {
 	private BooleanProperty requireDigits;
 	private BooleanProperty requireLowercase;
 	private BooleanProperty requireUppercase;
-	
-	private StringProperty password;
+
 	private StringProperty errorText;
 	
     private PasswordGenerator generator;
+    private SimpleListProperty<String> passwords;
 	
 	/** Initialize the properties for the viewmodel
 	 */
@@ -32,9 +35,9 @@ public class ViewModel {
 		this.requireLowercase = new SimpleBooleanProperty(false);
 		this.requireUppercase = new SimpleBooleanProperty(false);
 		
-		this.password = new SimpleStringProperty("");
 		this.errorText = new SimpleStringProperty("");
-
+		
+		this.passwords = new SimpleListProperty<String>(FXCollections.observableArrayList(new ArrayList<String>()));
         Random randomNumberGenerator = new Random();
         this.generator = new PasswordGenerator(randomNumberGenerator.nextLong());
 	}
@@ -71,20 +74,20 @@ public class ViewModel {
 		return this.requireLowercase;
 	}
 
-	/** Return the password property
-	 * 
-	 * @return the password property
-	 */
-	public StringProperty getPassword() {
-		return this.password;
-	}
-
 	/** Return the error text property
 	 * 
 	 * @return the error text property
 	 */
 	public StringProperty getErrorText() {
 		return this.errorText;
+	}
+	
+	/**
+	 * Return the list of past passwords
+	 * @return an ArrayList of passwords
+	 */
+	public SimpleListProperty<String> getPasswords() {
+		return this.passwords;
 	}
 
 	/** Generates a password using the minimum length, require digit, require lower case, and require upper case property values.
@@ -95,7 +98,6 @@ public class ViewModel {
 	 */
 	public void generatePassword() {
     	int minimumLength = -1;
-    	this.password.setValue("");
     	
     	try {
     		minimumLength = Integer.parseInt(this.minimumLength.getValue());
@@ -117,7 +119,7 @@ public class ViewModel {
     	
     	String password = this.generator.generatePassword();
     	
-    	this.password.setValue(password);
+    	this.passwords.add(password);
     }
 
 }
