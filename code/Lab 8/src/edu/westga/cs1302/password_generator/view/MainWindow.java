@@ -22,6 +22,7 @@ public class MainWindow {
     @FXML private TextArea output;
     @FXML private Label errorTextLabel;
     @FXML private Button generatePasswordButton;
+    @FXML private Label lengthError;
     
     private ViewModel vm;
     
@@ -42,5 +43,19 @@ public class MainWindow {
     				this.vm.generatePassword();
     			} 
     	);
+    	
+    	this.minimumLength.textProperty().addListener((observable, oldValue, newValue) -> {
+    		try {
+    			if (newValue == null) {
+        			this.lengthError.setVisible(true);
+        		} else if (newValue.matches("^[1-9]\\d*")) {
+        			this.lengthError.setVisible(false);
+        		} else {
+        			this.lengthError.setVisible(true);
+        		}
+    		} catch (NumberFormatException numberError) {
+    			this.lengthError.setVisible(true);
+    		}
+    	});
     }
 }

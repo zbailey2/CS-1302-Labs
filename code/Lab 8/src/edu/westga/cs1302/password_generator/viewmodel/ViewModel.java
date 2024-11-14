@@ -38,7 +38,7 @@ public class ViewModel {
         Random randomNumberGenerator = new Random();
         this.generator = new PasswordGenerator(randomNumberGenerator.nextLong());
 	}
-
+	
 	/** Return the minimum length property
 	 * 
 	 * @return the minimum length property
