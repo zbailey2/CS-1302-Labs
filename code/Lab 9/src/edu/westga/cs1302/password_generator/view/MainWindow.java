@@ -32,8 +32,13 @@ public class MainWindow {
     
     private ViewModel vm;
     
+    private void setupEnablingofControls() {
+    	this.generatePasswordButton.disableProperty().bind(this.minimumLength.textProperty().isEmpty());
+    }
+    
     @FXML
     void initialize() {
+    	this.setupEnablingofControls();
     	this.vm = new ViewModel();
     	this.vm.getRequireDigits().bind(this.mustIncludeDigits.selectedProperty());
     	this.vm.getRequireLowercase().bind(this.mustIncludeLowerCaseLetters.selectedProperty());
@@ -55,7 +60,7 @@ public class MainWindow {
     		Alert alert = new Alert(Alert.AlertType.INFORMATION);
     		alert.setTitle("About");
     		alert.setHeaderText("About Password Generator");
-    		alert.setContentText("This generates passwords based on the selected options.\n\n" + "Author: Zachary Bailey\n");
+    		alert.setContentText("This generates passwords based on the selected options." + System.lineSeparator() + "Author: Zachary Bailey" + System.lineSeparator());
     		alert.showAndWait();
     	});
     	this.closeMenuItem.setOnAction((event) -> {
