@@ -1,4 +1,4 @@
-package edu.westga.cs1302.project3.test.model;
+package edu.westga.cs1302.project3.test.model.Task;
 
 import org.junit.jupiter.api.Test;
 import edu.westga.cs1302.project3.model.Task;
@@ -6,15 +6,15 @@ import edu.westga.cs1302.project3.model.Task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TestTaskConstructor {
+public class TestConstructor {
 	
 	@Test
 	public void testValidTask() {
 		String title = "Title";
 		String description = "Description";
 		Task task = new Task(title, description);
-		assertEquals("Title", task.getTitle());
-		assertEquals("Description", task.getDescription());
+		assertEquals("Title", task.getTitle(), "Ensures that the title matches");
+		assertEquals("Description", task.getDescription(), "Ensures that the descriptions match");
 	}
 	
 	@Test
