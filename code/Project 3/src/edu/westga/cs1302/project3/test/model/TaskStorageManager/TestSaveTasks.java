@@ -14,14 +14,14 @@ import edu.westga.cs1302.project3.model.TaskManager;
 import edu.westga.cs1302.project3.model.TaskStorageManager;
 
 public class TestSaveTasks {
-	private final String SAVE_TASK_TEST = "testSaveTask.txt";
+	private static final String SAVE_TASK_TEST = "testSaveTask.txt";
+	
 	@Test
 	public void testSavingOneTask() throws IOException {
 		TaskManager manageTasks = new TaskManager();
 		manageTasks.addTask(new Task("Complete Project 3 Part 1", "Code the tests for the save tasks method"));
 		
-		TaskStorageManager manageStorage = new TaskStorageManager();
-		manageStorage.saveTasks(manageTasks, SAVE_TASK_TEST);
+		TaskStorageManager.saveTasks(manageTasks, SAVE_TASK_TEST);
 		
 		File inputFile = new File(SAVE_TASK_TEST);
 		try(Scanner reader = new Scanner(inputFile)){
@@ -36,8 +36,7 @@ public class TestSaveTasks {
 		manageTasks.addTask(new Task("Complete Project 3 Part 1", "Code the tests for the save tasks method"));
 		manageTasks.addTask(new Task("Eat Food", "Dont forget to eat food at some point sometime"));
 		
-		TaskStorageManager manageStorage = new TaskStorageManager();
-		manageStorage.saveTasks(manageTasks, SAVE_TASK_TEST);
+		TaskStorageManager.saveTasks(manageTasks, SAVE_TASK_TEST);
 		
 		File inputFile = new File(SAVE_TASK_TEST);
 		try(Scanner reader = new Scanner(inputFile)){
@@ -48,9 +47,8 @@ public class TestSaveTasks {
 	
 	@Test
 	public void testSavingWithNullTasks() throws IOException{
-		TaskStorageManager manageStorage = new TaskStorageManager();
 		assertThrows(IllegalArgumentException.class, () -> {
-			manageStorage.saveTasks(null, SAVE_TASK_TEST);
+			TaskStorageManager.saveTasks(null, SAVE_TASK_TEST);
 		});
 	}
 	
@@ -59,9 +57,8 @@ public class TestSaveTasks {
 		TaskManager manageTasks = new TaskManager();
 		manageTasks.addTask(new Task("Complete Project 3 Part 1", "Code the tests for the save tasks method"));
 		
-		TaskStorageManager manageStorage = new TaskStorageManager();
 		assertThrows(IllegalArgumentException.class, () -> {
-			manageStorage.saveTasks(manageTasks, null);
+			TaskStorageManager.saveTasks(manageTasks, null);
 		});
 	}
 	
@@ -69,9 +66,8 @@ public class TestSaveTasks {
 	public void testEmptyTaskManager() throws IOException {
 		TaskManager manageTasks = new TaskManager();
 		
-		TaskStorageManager manageStorage = new TaskStorageManager();
 		assertThrows(IllegalArgumentException.class, () -> {
-			manageStorage.saveTasks(manageTasks, SAVE_TASK_TEST);
+			TaskStorageManager.saveTasks(manageTasks, SAVE_TASK_TEST);
 		});
 	}
 	
@@ -80,9 +76,8 @@ public class TestSaveTasks {
 		TaskManager manageTasks = new TaskManager();
 		manageTasks.addTask(new Task("Complete Project 3 Part 1", "Code the tests for the save tasks method"));
 		
-		TaskStorageManager manageStorage = new TaskStorageManager();
 		assertThrows(IllegalArgumentException.class, () -> {
-			manageStorage.saveTasks(manageTasks, "testInvalidFile.png");
+			TaskStorageManager.saveTasks(manageTasks, "testInvalidFile.img");
 		});
 	}
 }

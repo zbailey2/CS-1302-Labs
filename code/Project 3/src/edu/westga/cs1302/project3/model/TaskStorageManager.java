@@ -22,7 +22,7 @@ public class TaskStorageManager {
 	 * @param filePath the file path for the file to be downloaded too
 	 * @throws IOException
 	 */
-	public void saveTasks(TaskManager tasks, String filePath) throws IOException {
+	public static void saveTasks(TaskManager tasks, String filePath) throws IOException {
 		if (tasks == null || tasks.getTasks().isEmpty()) {
 			throw new IllegalArgumentException("Tasks can not be empty");
 		}
@@ -47,9 +47,9 @@ public class TaskStorageManager {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public TaskManager loadTasks(String filePath) throws FileNotFoundException, IOException {
+	public static TaskManager loadTasks(String filePath) throws FileNotFoundException, IOException {
 		if (filePath == null || filePath.isEmpty()) {
-			throw new IllegalArgumentException("Must include a file path");
+			throw new IllegalArgumentException("Must include a file path with valid format for a Text Document");
 		}
 		TaskManager manageTasks = new TaskManager();
 		ArrayList<Task> tasks = manageTasks.getTasks();
@@ -61,12 +61,13 @@ public class TaskStorageManager {
 					String strippedLine = baseLine.strip();
 					String[] parts = strippedLine.split(",");
 					try {
+						if (parts.length != 2) {
+							throw new IllegalArgumentException("unable to create list of tasks, bad title/description on line " + lineNumber + " : " + strippedLine);
+						}
 						String title = parts[0];
 						String description = parts[1];
 						Task currentTask = new Task(title, description);
 						tasks.add(currentTask);
-					} catch (IllegalArgumentException exception) {
-						throw new IOException("Unable to create list of tasks, bad title/description on line" + lineNumber + ":" + strippedLine);
 					} catch (IndexOutOfBoundsException dataError) {
 						throw new IOException("Missing either title or the description on line " + lineNumber + ":" + strippedLine);
 					}

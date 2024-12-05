@@ -17,7 +17,7 @@ import edu.westga.cs1302.project3.model.TaskStorageManager;
 
 public class TestLoadTasks {
 	
-	private final String TEST_LOAD_TASKS = "testLoadTasks.txt";
+	private static final String TEST_LOAD_TASKS = "testLoadTasks.txt";
 	
 	@BeforeEach
 	public void clearFile() throws IOException{
@@ -28,22 +28,22 @@ public class TestLoadTasks {
 	
 	@Test
 	public void testNonExistentFile() throws FileNotFoundException, IOException {
-		TaskStorageManager manageStorage = new TaskStorageManager();
+		new TaskStorageManager();
 		
 		assertThrows(FileNotFoundException.class, () -> {
-			manageStorage.loadTasks("noExistingFile.txt");
+			TaskStorageManager.loadTasks("noExistingFile.txt");
 		});
 	}
 	
 	@Test
 	public void testLoadTasks() throws IOException{
-		TaskStorageManager manageStorage = new TaskStorageManager();
+		new TaskStorageManager();
 		TaskManager manageTasks = new TaskManager();
 		
 		manageTasks.addTask(new Task("Code tests", "Now code the tests for the loadTask method"));
-		manageStorage.saveTasks(manageTasks, TEST_LOAD_TASKS);
+		TaskStorageManager.saveTasks(manageTasks, TEST_LOAD_TASKS);
 		
-		TaskManager loadedManager = manageStorage.loadTasks(TEST_LOAD_TASKS);
+		TaskManager loadedManager = TaskStorageManager.loadTasks(TEST_LOAD_TASKS);
 		assertEquals("Code tests", loadedManager.getTasks().get(0).getTitle(), "Makes sure that the newly loaded list from file file has correct title field for Task object");
 		assertEquals("Now code the tests for the loadTask method", loadedManager.getTasks().get(0).getDescription(), "Makes sure that the newly loaded list from the file has the correct description for the Task object");
 		assertEquals(1, loadedManager.getTasks().size());
@@ -51,14 +51,13 @@ public class TestLoadTasks {
 	
 	@Test
 	public void testLoadingMultipleTasks() throws IOException{
-		TaskStorageManager manageStorage = new TaskStorageManager();
 		TaskManager manageTasks = new TaskManager();
 		
 		manageTasks.addTask(new Task("Code tests", "Now code the tests for the loadTask method"));
 		manageTasks.addTask(new Task("Code everything", "Code every test at every point in time"));
-		manageStorage.saveTasks(manageTasks, TEST_LOAD_TASKS);
+		TaskStorageManager.saveTasks(manageTasks, TEST_LOAD_TASKS);
 		
-		TaskManager loadedManager = manageStorage.loadTasks(TEST_LOAD_TASKS);
+		TaskManager loadedManager = TaskStorageManager.loadTasks(TEST_LOAD_TASKS);
 		assertEquals("Code tests", loadedManager.getTasks().get(0).getTitle(), "Makes sure that the newly loaded list from file file has correct title field for Task object");
 		assertEquals("Now code the tests for the loadTask method", loadedManager.getTasks().get(0).getDescription(), "Makes sure that the newly loaded list from the file has the correct description for the Task object");
 		assertEquals(2, loadedManager.getTasks().size());
@@ -68,32 +67,41 @@ public class TestLoadTasks {
 	
 	@Test
 	public void testLoadEmptyList() throws IOException{
-		TaskStorageManager manageStorage = new TaskStorageManager();
 		
-		TaskManager loadedManager = manageStorage.loadTasks(TEST_LOAD_TASKS);
+		TaskManager loadedManager = TaskStorageManager.loadTasks(TEST_LOAD_TASKS);
 		assertTrue(loadedManager.getTasks().isEmpty());
 	}
 	
 	@Test
 	public void testWithNullFilepath() throws IOException {
-		TaskStorageManager manageStorage = new TaskStorageManager();
 		TaskManager manageTasks = new TaskManager();
 		
 		manageTasks.addTask(new Task("Code tests", "Now code the tests for the loadTask method"));
 		manageTasks.addTask(new Task("Code everything", "Code every test at every point in time"));
-		manageStorage.saveTasks(manageTasks, TEST_LOAD_TASKS);
+		TaskStorageManager.saveTasks(manageTasks, TEST_LOAD_TASKS);
 		
 		assertThrows(IllegalArgumentException.class, () -> {
-			manageStorage.loadTasks(null);
+			TaskStorageManager.loadTasks(null);
 		});
 	}
 	
 	@Test
 	public void testWithInvalidFileType() throws IOException{
-		TaskStorageManager manageStorage = new TaskStorageManager();
 		
 		assertThrows(FileNotFoundException.class, () -> {
-			manageStorage.loadTasks("nonExistentFileType.png");
+			TaskStorageManager.loadTasks("nonExistentFileType.png");
+		});
+	}
+	
+	@Test
+	public void testLoadInvalidDataFromTask() throws IOException{
+		TaskManager manageTasks = new TaskManager();
+		
+		manageTasks.addTask(new Task("Code tests,", "Now code the tests for the loadTask method"));
+		TaskStorageManager.saveTasks(manageTasks, TEST_LOAD_TASKS);
+		
+		assertThrows(IllegalArgumentException.class, () -> {
+			TaskStorageManager.loadTasks(TEST_LOAD_TASKS);
 		});
 	}
 }
