@@ -2,7 +2,7 @@ package edu.westga.cs1302.project3.model;
 
 import java.util.ArrayList;
 
-/** Manage methods for specific tasks
+/** Creates a list of tasks in a taskmanager object, implements methods for managing which tasks are added or removed
  * 
  * @author Zachary Bailey
  * @version Fall 2024
