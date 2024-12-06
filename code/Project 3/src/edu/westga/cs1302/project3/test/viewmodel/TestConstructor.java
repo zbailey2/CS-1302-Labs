@@ -16,8 +16,7 @@ public class TestConstructor {
 		assertEquals("Default Task 2", vm.getTasks().get(1).getTitle(), "Makes sure that the default viewmodel's second default task is initialized with right title");
 		assertEquals("This is the first default task", vm.getTasks().get(0).getDescription(), "Makes sure that the default viewmodel's first default task is initialized with right description");
 		assertEquals("This is the second default task", vm.getTasks().get(1).getDescription(),  "Makes sure that the default viewmodel's first default task is initialized with right description");
+		assertEquals("", vm.getTitle().get());
+		assertEquals("", vm.getDescription().get());
 	}
-	
-	//Add more tests later? Right now only default tasks exist for ViewModel's current ListProperty, no addTasks() method required via project outline strictly just binding list between both!
-	//Check this again later! Don't forget!
 }

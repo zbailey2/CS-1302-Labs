@@ -42,7 +42,7 @@ public class MainWindow {
 	@FXML
 	void initialize() {
 		this.vm = new ViewModel();
-		this.taskListView.itemsProperty().bind(this.vm.getTasks());
+		this.taskListView.setItems(this.vm.getTasks());
 
 		// Menu Item
 		this.menuItemLoad.setOnAction((event) -> {

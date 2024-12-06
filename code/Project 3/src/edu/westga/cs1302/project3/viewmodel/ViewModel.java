@@ -8,6 +8,8 @@ import edu.westga.cs1302.project3.model.TaskManager;
 import edu.westga.cs1302.project3.model.TaskStorageManager;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 
 /** Manages utilizing the model and makes properties available to bind the UI elements.
@@ -18,6 +20,8 @@ import javafx.collections.FXCollections;
 public class ViewModel {
 	private TaskManager manageTasks;
 	private ListProperty<Task> tasks;
+	private StringProperty title;
+	private StringProperty description;
 	
 	/**
 	 * Creates a basic object for the properties in the viewModel, creates 2 default tasks to show that it works
@@ -31,6 +35,10 @@ public class ViewModel {
 		this.manageTasks.addTask(new Task("Default Task 2", "This is the second default task"));
 		
 		this.tasks = new SimpleListProperty<Task>(FXCollections.observableArrayList(this.manageTasks.getTasks()));
+		
+		//Task implementation
+		this.title = new SimpleStringProperty("");
+		this.description = new SimpleStringProperty("");
 	}
 	
 	/**
@@ -47,6 +55,22 @@ public class ViewModel {
 	 */
 	public TaskManager getTaskManager() {
 		return this.manageTasks;
+	}
+	
+	/**
+	 * returns the string property for getTitle
+	 * @return StringProperty title
+	 */
+	public StringProperty getTitle() {
+		return this.title;
+	}
+	
+	/**
+	 * returns the string property for getDescription
+	 * @return StringProperty description
+	 */
+	public StringProperty getDescription() {
+		return this.description;
 	}
 	
 	/**
@@ -71,5 +95,19 @@ public class ViewModel {
 			throw new IllegalArgumentException("manageTasks can not be null");
 		}
 		TaskStorageManager.saveTasks(this.getTaskManager(), filePath);
+	}
+	
+	/**
+	 * Adds a task to the list of tasks for the task manager
+	 */
+	public void addTask() {
+		String title = this.getTitle().get();
+		String description = this.getDescription().get();
+		if (title == null || description == null || title.isEmpty() || description.isEmpty()) {
+			throw new IllegalArgumentException("Must include title and description to create a valid task");
+		}
+		Task newTask = new Task(title, description);
+		this.manageTasks.addTask(newTask);
+		this.tasks.set(FXCollections.observableArrayList(this.manageTasks.getTasks()));
 	}
 }
