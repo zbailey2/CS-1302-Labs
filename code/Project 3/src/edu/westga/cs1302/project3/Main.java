@@ -14,7 +14,9 @@ import javafx.stage.Stage;
  * @version Fall 2024​
  */
 public class Main extends Application {
-
+	public static final String TASK_WINDOW = "view/AddTaskWindow.fxml";
+	public static final String TASK_WINDOW_TITLE = "Project 3 Add Task Window";
+	
 	private static final String WINDOW_TITLE = "Project 3";
 	private static final String GUI_RESOURCE = "view/MainWindow.fxml";
 	  
