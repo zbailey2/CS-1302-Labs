@@ -18,5 +18,6 @@ public class TestConstructor {
 		assertEquals("This is the second default task", vm.getTasks().get(1).getDescription(),  "Makes sure that the default viewmodel's first default task is initialized with right description");
 		assertEquals("", vm.getTitle().get());
 		assertEquals("", vm.getDescription().get());
+		assertEquals(null,vm.getSelectedTask().get(),"Ensures that when the viewmodel is constructed that the selectedTask does not contain a value yet");
 	}
 }

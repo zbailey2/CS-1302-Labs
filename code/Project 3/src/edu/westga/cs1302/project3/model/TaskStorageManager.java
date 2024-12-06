@@ -66,7 +66,7 @@ public class TaskStorageManager {
 				String strippedLine = baseLine.strip();
 				String[] parts = strippedLine.split(",");
 				if (parts.length != 2) {
-					throw new IllegalArgumentException("unable to create list of tasks, bad title/description on line "
+					throw new IllegalArgumentException("Unable to create list of tasks, bad title/description on line "
 							+ lineNumber + " : " + strippedLine);
 				}
 				String title = parts[0];
@@ -76,7 +76,7 @@ public class TaskStorageManager {
 			}
 		}
 		if (manageTasks.getTasks().isEmpty()) {
-			throw new IllegalArgumentException("File is not in correct format");
+			throw new IllegalArgumentException("File is not in correct format, make sure that the document is a text document with a CSV format");
 		}
 		return manageTasks;
 	}

@@ -7,7 +7,9 @@ import edu.westga.cs1302.project3.model.Task;
 import edu.westga.cs1302.project3.model.TaskManager;
 import edu.westga.cs1302.project3.model.TaskStorageManager;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -22,6 +24,7 @@ public class ViewModel {
 	private ListProperty<Task> tasks;
 	private StringProperty title;
 	private StringProperty description;
+	private ObjectProperty<Task> selectedTask;
 	
 	/**
 	 * Creates a basic object for the properties in the viewModel, creates 2 default tasks to show that it works
@@ -39,6 +42,9 @@ public class ViewModel {
 		//Task implementation
 		this.title = new SimpleStringProperty("");
 		this.description = new SimpleStringProperty("");
+		
+		//Selected task for removeTask
+		this.selectedTask = new SimpleObjectProperty<Task>();
 	}
 	
 	/**
@@ -71,6 +77,14 @@ public class ViewModel {
 	 */
 	public StringProperty getDescription() {
 		return this.description;
+	}
+	
+	/**
+	 * returns the object property for the currently selected task
+	 * @return ObjectProperty Task the selected Task
+	 */
+	public ObjectProperty<Task> getSelectedTask() {
+		return this.selectedTask;
 	}
 	
 	/**
@@ -108,6 +122,18 @@ public class ViewModel {
 		}
 		Task newTask = new Task(title, description);
 		this.manageTasks.addTask(newTask);
+		this.tasks.set(FXCollections.observableArrayList(this.manageTasks.getTasks()));
+	}
+	
+	/**
+	 * Removes a task from the currently selected item in the list
+	 */
+	public void removeTask() {
+		Task selectedTask = this.getSelectedTask().get();
+		if (selectedTask == null) {
+			throw new IllegalArgumentException("The selected task can not be null");
+		}
+		this.manageTasks.removeTask(selectedTask);
 		this.tasks.set(FXCollections.observableArrayList(this.manageTasks.getTasks()));
 	}
 }

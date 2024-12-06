@@ -28,21 +28,19 @@ import javafx.stage.Stage;
  * @version Fall 2024
  */
 public class MainWindow {
-	@FXML
-	private ListView<Task> taskListView;
-	@FXML
-	private MenuItem menuItemLoad;
-	@FXML
-	private MenuItem menuItemSave;
-	@FXML
-	private Button addTaskWindow;
-
+	@FXML private ListView<Task> taskListView;
+	@FXML private MenuItem menuItemLoad;
+	@FXML private MenuItem menuItemSave;
+	@FXML private Button addTaskWindow;
+	@FXML private Button removeTaskButton;
+	
 	private ViewModel vm;
 
 	@FXML
 	void initialize() {
 		this.vm = new ViewModel();
 		this.taskListView.setItems(this.vm.getTasks());
+		this.vm.getSelectedTask().bind(this.taskListView.getSelectionModel().selectedItemProperty());
 
 		// Menu Item
 		this.menuItemLoad.setOnAction((event) -> {
@@ -76,6 +74,18 @@ public class MainWindow {
 				alert.showAndWait();
 			}
 		});
+		
+		//Remove a task from the selected value in list view
+		this.removeTaskButton.setOnAction((event) -> {
+			try {
+				this.vm.removeTask();
+			} catch (IllegalArgumentException illegalArguments) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error removing task");
+				alert.setContentText("Could not remove task " + illegalArguments.getMessage());
+				alert.showAndWait();
+			}
+		});
 	}
 
 	/**
@@ -97,7 +107,7 @@ public class MainWindow {
 			} catch (FileNotFoundException noFile) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error loading file");
-				alert.setContentText("Error loading task " + noFile.getMessage());
+				alert.setContentText("Could not find file " + noFile.getMessage());
 				alert.showAndWait();
 			} catch (IOException ioException) {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -107,7 +117,7 @@ public class MainWindow {
 			} catch (IllegalArgumentException illegalFile) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Not valid file type");
-				alert.setContentText("Error loading task " + illegalFile.getMessage());
+				alert.setContentText("There was an issue loading the given file " + illegalFile.getMessage());
 				alert.showAndWait();
 			}
 		}
@@ -135,7 +145,7 @@ public class MainWindow {
 			} catch (IllegalArgumentException illegalFile) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Not valid file type");
-				alert.setContentText("Error saving task " + illegalFile.getMessage());
+				alert.setContentText("There was an issue with saving the current file " + illegalFile.getMessage());
 				alert.showAndWait();
 			}
 		}
