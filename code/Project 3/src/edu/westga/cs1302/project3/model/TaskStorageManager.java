@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -58,6 +59,7 @@ public class TaskStorageManager {
 			throw new IllegalArgumentException("Must be a valid text document file");
 		}
 		TaskManager manageTasks = new TaskManager();
+		Map<String, Task> uniqueTasks = manageTasks.getMap();
 		ArrayList<Task> tasks = manageTasks.getTasks();
 		File inputFile = new File(filePath);
 		try (Scanner reader = new Scanner(inputFile)) {
@@ -73,6 +75,7 @@ public class TaskStorageManager {
 				String description = parts[1];
 				Task currentTask = new Task(title, description);
 				tasks.add(currentTask);
+				uniqueTasks.put(currentTask.getTitle(), currentTask);
 			}
 		}
 		if (manageTasks.getTasks().isEmpty()) {

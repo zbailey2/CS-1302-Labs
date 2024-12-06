@@ -50,13 +50,9 @@ public class TestAddTask {
 		Task task1= new Task("Title", "Description");
 		TaskManager manageTasks = new TaskManager();
 		manageTasks.addTask(task1);
-		manageTasks.addTask(task1);
-		assertEquals(task1, manageTasks.getTasks().get(0)," Ensures that the object is equal to the first added object");
-		assertEquals(task1, manageTasks.getTasks().get(1), "Makes sure that the object is equal to the second added object");
-		assertEquals(2, manageTasks.getTasks().size(), "Makes sure that the list contains two objects");
-		assertEquals("Title", manageTasks.getTasks().get(0).getTitle(), "Ensuring that the first items title field was not changed");
-		assertEquals("Description", manageTasks.getTasks().get(0).getDescription(), "Ensuring that the first items description field was not changed");
-		assertEquals("Title", manageTasks.getTasks().get(1).getTitle(), "Ensuring that the second items title field were not changed");
-		assertEquals("Description", manageTasks.getTasks().get(1).getDescription(), "Makes sure that the seconds items description field was not changed");
+		
+		assertThrows(IllegalArgumentException.class, () -> {
+			manageTasks.addTask(task1);
+		});
 	}
 }

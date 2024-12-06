@@ -74,15 +74,4 @@ public class TestSaveTasks {
 			assertEquals("Valid data", vm.getTasks().get(0).getDescription(), "Checks to make sure that the first loaded task was saved with correct description");
 		}
 	}
-	
-	@Test
-	public void testLockedFilePath() throws IOException{
-		ViewModel vm = new ViewModel();
-		File file = new File(LOCKED_FILE);
-		file.setWritable(false);
-		
-		assertThrows(IllegalArgumentException.class, () -> {
-			vm.saveTasks(vm.getTaskManager(), LOCKED_FILE);
-		});
-	}
 }

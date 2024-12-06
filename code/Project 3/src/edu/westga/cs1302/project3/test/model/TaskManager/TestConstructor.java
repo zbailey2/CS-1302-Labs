@@ -12,5 +12,6 @@ public class TestConstructor {
 	public void testValidConstructor() {
 		TaskManager manageTask = new TaskManager();
 		assertEquals(0, manageTask.getTasks().size(), "Ensures that the list is initalized empty");
+		assertEquals(0, manageTask.getMap().size(), "Ensures that the map is initalzied empty");
 	}
 }
