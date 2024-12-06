@@ -42,18 +42,34 @@ public class ViewModel {
 	}
 	
 	/**
+	 * Gets the current TaskManager object
+	 * @return TaskManager the current TaskManager object
+	 */
+	public TaskManager getTaskManager() {
+		return this.manageTasks;
+	}
+	
+	/**
 	 * loads a set of files from a designated file area
-	 * @param filePath the desired ficclePath for the download
+	 * @param filePath the desired filePath for the download
 	 * @throws IOException 
 	 */
 	public void loadTasks(String filePath) throws IOException, FileNotFoundException {
-		try {
 			this.manageTasks = TaskStorageManager.loadTasks(filePath);
 			this.tasks.set(FXCollections.observableArrayList(this.manageTasks.getTasks()));
-		} catch (FileNotFoundException noFile) {
-			throw new FileNotFoundException("No file was found: " + filePath);
-		} catch (IOException ioError) {
-			throw new IOException("Unable to load file from given file path " + filePath);
+	}
+	
+	/**
+	 * saves the current tasks to the selected file
+	 * @param filePath the selected filePath
+	 * @param manageTask the current TaskManager object
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
+	public void saveTasks(TaskManager manageTask, String filePath) throws IOException, FileNotFoundException {
+		if (manageTask == null) {
+			throw new IllegalArgumentException("manageTasks can not be null");
 		}
+		TaskStorageManager.saveTasks(this.getTaskManager(), filePath);
 	}
 }

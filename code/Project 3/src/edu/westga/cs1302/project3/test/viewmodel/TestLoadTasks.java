@@ -71,8 +71,9 @@ public class TestLoadTasks {
 	@Test
 	public void testEmptyFile() throws IOException {
 		ViewModel vm = new ViewModel();
-		vm.loadTasks(TEST_LOAD_TASKS);
-		assertEquals(0, vm.getTasks().size(), "makes sure if empty file is loaded that no task objects exist within the TaskManager list");
+		assertThrows(IllegalArgumentException.class, () -> {
+			vm.loadTasks(TEST_LOAD_TASKS);
+		});
 	}
 	
 	@Test

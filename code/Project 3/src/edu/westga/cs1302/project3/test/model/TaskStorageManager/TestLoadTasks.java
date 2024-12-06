@@ -2,7 +2,6 @@ package edu.westga.cs1302.project3.test.model.TaskStorageManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -68,8 +67,9 @@ public class TestLoadTasks {
 	@Test
 	public void testLoadEmptyList() throws IOException{
 		
-		TaskManager loadedManager = TaskStorageManager.loadTasks(TEST_LOAD_TASKS);
-		assertTrue(loadedManager.getTasks().isEmpty());
+		assertThrows(IllegalArgumentException.class, () -> {
+			TaskStorageManager.loadTasks(TEST_LOAD_TASKS);
+		});
 	}
 	
 	@Test
